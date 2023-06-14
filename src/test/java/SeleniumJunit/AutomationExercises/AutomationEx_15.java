@@ -29,32 +29,32 @@ public class AutomationEx_15 {
         String exceptionResult = "Automation Exercise";
         Assert.assertEquals(exceptionResult,driver.getTitle());
 
-        eventItem("//a[normalize-space()='Signup / Login']");
+        itemClick("//a[normalize-space()='Signup / Login']");
 
         Faker faker = new Faker();
         String name = faker.name().nameWithMiddle();
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
 
-        eventItem("//input[@data-qa='signup-name']",name);
-        eventItem("//input[@data-qa='signup-email']",email);
-        eventItem("//button[@data-qa='signup-button']");
-        eventItem("//input[@id='id_gender1']");
-        eventItem("//input[@id='password']",password);
+        inputEnter("//input[@data-qa='signup-name']",name);
+        inputEnter("//input[@data-qa='signup-email']",email);
+        itemClick("//button[@data-qa='signup-button']");
+        itemClick("//input[@id='id_gender1']");
+        inputEnter("//input[@id='password']",password);
 
         dropSelectItem("//select[@id='days']","10");
         dropSelectItem("//select[@id='months']","April");
         dropSelectItem("//select[@id='years']","2000");
 
-        eventItem("//input[@id='newsletter']");
-        eventItem("//input[@id='optin']");
+        itemClick("//input[@id='newsletter']");
+        itemClick("//input[@id='optin']");
 
         String firstName = faker.name().firstName();
         String lastname = faker.name().lastName();
         String address = faker.address().fullAddress();
-        eventItem("//input[@id='first_name']",firstName);
-        eventItem("//input[@id='last_name']",lastname);
-        eventItem("//input[@id='address1']",address);
+        inputEnter("//input[@id='first_name']",firstName);
+        inputEnter("//input[@id='last_name']",lastname);
+        inputEnter("//input[@id='address1']",address);
 
         dropSelectItem("//select[@id='country']","India");
 
@@ -63,18 +63,18 @@ public class AutomationEx_15 {
         String city = faker.address().city();
         String zipCode = faker.address().zipCode();
         String mobileNumber = faker.phoneNumber().cellPhone();
-        eventItem("//input[@id='state']",state);
-        eventItem("//input[@id='city']",city);
-        eventItem("//input[@id='zipcode']",zipCode);
-        eventItem("//input[@id='mobile_number']",mobileNumber);
-        eventItem("//button[normalize-space()='Create Account']");
+        inputEnter("//input[@id='state']",state);
+        inputEnter("//input[@id='city']",city);
+        inputEnter("//input[@id='zipcode']",zipCode);
+        inputEnter("//input[@id='mobile_number']",mobileNumber);
+        itemClick("//button[normalize-space()='Create Account']");
 
         String exceptResult = "ACCOUNT CREATED!";
         String actualResult = driver.findElement(By.xpath("//b[normalize-space()='Account Created!']"))
                 .getText();
         Assert.assertEquals(exceptResult,actualResult);
 
-        eventItem("//a[@class='btn btn-primary']");
+        itemClick("//a[@class='btn btn-primary']");
 
         //*************** Add to Product**********************
         String exceptedresult = "Logged in as sari";
@@ -90,11 +90,11 @@ public class AutomationEx_15 {
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
         actions.click().perform();
 
-        eventItem("//u[normalize-space()='View Cart']//parent::a");
+        itemClick("//u[normalize-space()='View Cart']//parent::a");
 
         //***********Cart Check****************
         Assert.assertTrue(driver.findElement(By.xpath("//li[@class='active']")).isDisplayed());
-        eventItem("//a[@class='btn btn-default check_out']");
+        itemClick("//a[@class='btn btn-default check_out']");
 
         //*************Checkout***************
         Assert.assertTrue(driver.findElement(By.xpath("//h3[normalize-space()='Your delivery address']")).isDisplayed());
@@ -104,8 +104,8 @@ public class AutomationEx_15 {
 
 
         String message = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-        eventItem("//textarea[@name='message']",message);
-        eventItem("//a[@class='btn btn-default check_out']");
+        inputEnter("//textarea[@name='message']",message);
+        itemClick("//a[@class='btn btn-default check_out']");
         //***********Payment*************
         String cardName = faker.name().firstName()+" "+faker.name().lastName();
         String cardNumber = faker.finance().creditCard();
@@ -113,18 +113,18 @@ public class AutomationEx_15 {
         String expiry_month = Integer.toString(faker.number().numberBetween(1,12));
         Date date = new Date();
         String expiry_year = Integer.toString(faker.number().numberBetween(date.getYear(),2050));
-        eventItem("//input[@name='name_on_card']",cardName);
-        eventItem("//input[@name='card_number']",cardNumber);
-        eventItem("//input[@name='cvc']",cvc);
-        eventItem("//input[@name='expiry_month']",expiry_month);
-        eventItem("//input[@name='expiry-year']",expiry_year);
-        eventItem("//button[@id='submit']");
+        inputEnter("//input[@name='name_on_card']",cardName);
+        inputEnter("//input[@name='card_number']",cardNumber);
+        inputEnter("//input[@name='cvc']",cvc);
+        inputEnter("//input[@name='expiry_month']",expiry_month);
+        inputEnter("//input[@name='expiry-year']",expiry_year);
+        itemClick("//button[@id='submit']");
         Assert.assertTrue(driver.findElement(By.xpath("//b[normalize-space()='Order Placed!']"))
                 .isDisplayed());
         //**********Delete Account********************
-        eventItem("//a[normalize-space()='Delete Account']");
+        itemClick("//a[normalize-space()='Delete Account']");
         Assert.assertTrue(driver.findElement(By.xpath("//b[normalize-space()='Account Deleted!']")).isDisplayed());
-        eventItem("//a[@class='btn btn-primary']");
+        itemClick("//a[@class='btn btn-primary']");
 
     }
 
@@ -144,18 +144,18 @@ public class AutomationEx_15 {
         selectDays.selectByVisibleText(visibletext);
     }
     /**
-     * eventItem
+     * itemClick
      * <pre>
      * Finds and clicks the element in the given locator
      *  !!! example usage :  eventItem("//a[normalize-space()='Delete Account']"); !!!
      * </pre>
      * @param xpathQuery String XPath Locator
      */
-    private void eventItem(String xpathQuery){
+    private void itemClick(String xpathQuery){
             driver.findElement(By.xpath(xpathQuery)).click();
     }
     /**
-     * eventItem
+     * inputEnter
      * <pre>
      * Finds the element in the given locator.
      * Writes the given text inside.
@@ -163,8 +163,9 @@ public class AutomationEx_15 {
      * </pre>
      * @param xpathQuery String XPath Locator
      * @param text String input text
+     *
      */
-    private void eventItem(String xpathQuery,String text){
+    private void inputEnter(String xpathQuery, String text){
             driver.findElement(By.xpath(xpathQuery))
                     .sendKeys(text);
     }
