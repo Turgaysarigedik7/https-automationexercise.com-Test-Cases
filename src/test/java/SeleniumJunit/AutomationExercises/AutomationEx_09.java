@@ -17,7 +17,7 @@ public class AutomationEx_09 {
     @Before
     public void setUp(){
         WebDriverManager.chromedriver().setup();
-        WebDriver driver = new ChromeDriver();
+        driver = new ChromeDriver();
     }
     @Test
     public void test09_Search_Product(){
