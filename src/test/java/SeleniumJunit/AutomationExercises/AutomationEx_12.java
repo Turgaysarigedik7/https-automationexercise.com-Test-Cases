@@ -1,7 +1,9 @@
 package SeleniumJunit.AutomationExercises;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,12 +17,16 @@ import java.time.Duration;
 import java.util.List;
 
 public class AutomationEx_12 {
-    @Test
-    public void test12_Add_Products_In_Cart() throws InterruptedException {
+    WebDriver driver;
+    @Before
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions opt = new ChromeOptions();
         opt.addExtensions(new File("C://Users//ACER//Downloads//extension_3_17_0_0.crx"));
-        WebDriver driver = new ChromeDriver(opt);
+        driver = new ChromeDriver(opt);
+    }
+    @Test
+    public void test12_Add_Products_In_Cart() throws InterruptedException {
 
         driver.get("http://automationexercise.com");
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));
@@ -75,5 +81,9 @@ public class AutomationEx_12 {
         int exceptSumTotal=900;
         Assert.assertEquals(exceptSumTotal,sumTotal);
 
+    }
+    @After
+    public void tearDown(){
+        driver.close();
     }
 }

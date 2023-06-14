@@ -1,7 +1,9 @@
 package SeleniumJunit.AutomationExercises;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -15,13 +17,17 @@ import java.io.File;
 import java.time.Duration;
 
 public class AutomationEx_14 {
-
-    @Test
-    public void test14_Place_Order_Register_while_Checkout(){
+    WebDriver driver;
+    @Before
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
         ChromeOptions opt = new ChromeOptions();
         opt.addExtensions(new File("C://Users//ACER//Downloads//extension_3_17_0_0.crx"));
-        WebDriver driver = new ChromeDriver(opt);
+        driver = new ChromeDriver(opt);
+    }
+
+    @Test
+    public void test14_Place_Order_Register_while_Checkout(){
 
         driver.get("http://automationexercise.com");
         Assert.assertTrue(driver.findElement(By.xpath("//a[@href='/product_details/43']"))
@@ -129,5 +135,9 @@ public class AutomationEx_14 {
                 .isDisplayed());
         driver.findElement(By.xpath("//a[@class='btn btn-primary']"))
                 .click();
+    }
+    @After
+    public void tearDown(){
+        driver.close();
     }
 }
