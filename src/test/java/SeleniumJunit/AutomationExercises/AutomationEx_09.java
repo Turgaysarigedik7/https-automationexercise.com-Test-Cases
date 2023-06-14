@@ -1,7 +1,9 @@
 package SeleniumJunit.AutomationExercises;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,10 +13,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import java.util.List;
 
 public class AutomationEx_09 {
-    @Test
-    public void test09_Search_Product(){
+    WebDriver driver;
+    @Before
+    public void setUp(){
         WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
+    }
+    @Test
+    public void test09_Search_Product(){
 
         driver.get("http://automationexercise.com");
         Assert.assertTrue(driver.findElement(By.xpath("//a[@href='/product_details/43']"))
@@ -34,6 +40,10 @@ public class AutomationEx_09 {
         int actual = productList.size();
         Assert.assertEquals(expected,actual);
 
+
+    }
+    @After
+    public void tearDown(){
         driver.close();
     }
 }
