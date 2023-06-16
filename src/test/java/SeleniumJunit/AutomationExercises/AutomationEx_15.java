@@ -36,11 +36,11 @@ public class AutomationEx_15 {
         String email = faker.internet().emailAddress();
         String password = faker.internet().password();
 
-        inputEnter("//input[@data-qa='signup-name']",name);
-        inputEnter("//input[@data-qa='signup-email']",email);
+        sendInputText("//input[@data-qa='signup-name']",name);
+        sendInputText("//input[@data-qa='signup-email']",email);
         itemClick("//button[@data-qa='signup-button']");
         itemClick("//input[@id='id_gender1']");
-        inputEnter("//input[@id='password']",password);
+        sendInputText("//input[@id='password']",password);
 
         dropSelectItem("//select[@id='days']","10");
         dropSelectItem("//select[@id='months']","April");
@@ -52,9 +52,9 @@ public class AutomationEx_15 {
         String firstName = faker.name().firstName();
         String lastname = faker.name().lastName();
         String address = faker.address().fullAddress();
-        inputEnter("//input[@id='first_name']",firstName);
-        inputEnter("//input[@id='last_name']",lastname);
-        inputEnter("//input[@id='address1']",address);
+        sendInputText("//input[@id='first_name']",firstName);
+        sendInputText("//input[@id='last_name']",lastname);
+        sendInputText("//input[@id='address1']",address);
 
         dropSelectItem("//select[@id='country']","India");
 
@@ -63,10 +63,10 @@ public class AutomationEx_15 {
         String city = faker.address().city();
         String zipCode = faker.address().zipCode();
         String mobileNumber = faker.phoneNumber().cellPhone();
-        inputEnter("//input[@id='state']",state);
-        inputEnter("//input[@id='city']",city);
-        inputEnter("//input[@id='zipcode']",zipCode);
-        inputEnter("//input[@id='mobile_number']",mobileNumber);
+        sendInputText("//input[@id='state']",state);
+        sendInputText("//input[@id='city']",city);
+        sendInputText("//input[@id='zipcode']",zipCode);
+        sendInputText("//input[@id='mobile_number']",mobileNumber);
         itemClick("//button[normalize-space()='Create Account']");
 
         String exceptResult = "ACCOUNT CREATED!";
@@ -104,7 +104,7 @@ public class AutomationEx_15 {
 
 
         String message = faker.hitchhikersGuideToTheGalaxy().marvinQuote();
-        inputEnter("//textarea[@name='message']",message);
+        sendInputText("//textarea[@name='message']",message);
         itemClick("//a[@class='btn btn-default check_out']");
         //***********Payment*************
         String cardName = faker.name().firstName()+" "+faker.name().lastName();
@@ -113,11 +113,11 @@ public class AutomationEx_15 {
         String expiry_month = Integer.toString(faker.number().numberBetween(1,12));
         Date date = new Date();
         String expiry_year = Integer.toString(faker.number().numberBetween(date.getYear(),2050));
-        inputEnter("//input[@name='name_on_card']",cardName);
-        inputEnter("//input[@name='card_number']",cardNumber);
-        inputEnter("//input[@name='cvc']",cvc);
-        inputEnter("//input[@name='expiry_month']",expiry_month);
-        inputEnter("//input[@name='expiry-year']",expiry_year);
+        sendInputText("//input[@name='name_on_card']",cardName);
+        sendInputText("//input[@name='card_number']",cardNumber);
+        sendInputText("//input[@name='cvc']",cvc);
+        sendInputText("//input[@name='expiry_month']",expiry_month);
+        sendInputText("//input[@name='expiry-year']",expiry_year);
         itemClick("//button[@id='submit']");
         Assert.assertTrue(driver.findElement(By.xpath("//b[normalize-space()='Order Placed!']"))
                 .isDisplayed());
@@ -165,7 +165,7 @@ public class AutomationEx_15 {
      * @param text String input text
      *
      */
-    private void inputEnter(String xpathQuery, String text){
+    private void sendInputText(String xpathQuery, String text){
             driver.findElement(By.xpath(xpathQuery))
                     .sendKeys(text);
     }
